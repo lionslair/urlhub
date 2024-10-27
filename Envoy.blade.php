@@ -2,7 +2,7 @@
 
 @setup
 $repo              = 'git@github.com:lionslair/urlhub.git';
-$defaultBranch     = 'develop';
+$defaultBranch     = 'master';
 $env_file          = getcwd() . '/.env';
 $release_directory = getcwd() . '/releases';
 $current           = getcwd() . '/current';
@@ -11,9 +11,12 @@ $current_release   = $release_directory . '/' . $release;
 $storage           = getcwd(). '/storage';
 $cwd               = getcwd();
 $chmods            = ['storage', 'public'];
-$user              = 'forge';
-$group             = 'forge';
+$user              = 'nathanr';
+$group             = 'nathanr';
 $keep              = 3;
+$pushover_user     = 'uiZzjkVgRD8zzuUDHnWVAPLnVgusyu';
+$pushover_token    = 'adcjmiis4t9buh3uq95zcqx8nnokz1';
+
 @endsetup
 
 @macro('deploy', ['on' => 'localhost'])
@@ -167,11 +170,13 @@ cd {{ $current_release }}
 
 @error
 echo "TASK FAILED: ". $task;
+curl --data "user={{ $pushover_user }}" --data "token={{ $pushover_token }}" --data "title=Envoy deploy FAILED --data "message=Envoy deployment FAILED for urlhub. Died at task $task  Release folder was: {{ $current_release }}" "https://api.pushover.net/1/messages.json";
 {{--@slack('https://hooks.slack.com/services/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', '#devops', "Envoy deployment FAILED for Project Starter. Died at task $task | Release folder was: " . $current_release);--}}
 exit;
 @enderror
 
 @finished
+curl --data "user={{ $pushover_user }}" --data "token={{ $pushover_token }}" --data "title=Wedding Website Deployment" --data "message=Envoy task {{ $task }} ran on rzepeckisrvr.com  Release folder was: {{ $current_release }}" "https://api.pushover.net/1/messages.json";
 {{--@slack('https://hooks.slack.com/services/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', '#devops', "Envoy deployed Project Starter. Release folder was: " . $current_release);--}}
 echo "Deployment Complete";
 @endfinished
