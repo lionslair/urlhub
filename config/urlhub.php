@@ -15,7 +15,7 @@ return [
     /*
      * Enable users registration. If disabled it, no one can register.
      */
-    'registration' => true,
+    'registration' => false,
 
     /*
     |--------------------------------------------------------------------------
