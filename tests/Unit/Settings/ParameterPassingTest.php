@@ -10,7 +10,7 @@ use Tests\TestCase;
 #[PHPUnit\Group('forward-query')]
 class ParameterPassingTest extends TestCase
 {
-    const LABEL = 'Forward Query Parameters';
+    const LABEL = 'Parameter Passing';
 
     public function testAllEnabled(): void
     {

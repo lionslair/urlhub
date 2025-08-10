@@ -68,13 +68,13 @@
                         <div class="grid grid-cols-2">
                             <div>
                                 @svg('open-link-in-new')
-                                <span class="text-primary-800 dark:text-emerald-500">
+                                <span class="text-primary-700 dark:text-emerald-500">
                                     <a href="{{ $url->short_url }}" target="_blank">{{ urlDisplay($url->short_url, scheme: false) }}</a>
                                 </span>
                             </div>
                             <div>
                                 @svg('icon-item-detail')
-                                <span class="text-primary-800 dark:text-emerald-500">
+                                <span class="text-primary-700 dark:text-emerald-500">
                                     <a href="{{ route('link_detail', $url) }}" target="_blank">{{ urlDisplay(route('link_detail', $url), scheme: false) }}</a>
                                 </span>
                             </div>
@@ -175,10 +175,10 @@
                                 <textarea name="expired_notes" placeholder="Expired notes" class="form-input">{{ $url->expired_notes }}</textarea>
                             </div>
 
-                            <!-- Forward Query Parameters -->
+                            <!-- Parameter Passing -->
                             @if (settings()->forward_query && $url->author->forward_query)
                                 <div class="col-span-6 mt-6">
-                                    <label class="form-label"># Forward Query Parameters</label>
+                                    <label class="form-label"># Parameter Passing</label>
                                     <p class="font-light text-sm dark:text-dark-400">Forward query parameters from your short link to the destination URL. For example, <code class="text-slate-600 dark:text-dark-400 dark:underline dark:decoration-dotted">https://short.link/abc?utm_medium=social</code> will redirect to <code class="text-slate-600 dark:text-dark-400 dark:underline dark:decoration-dotted">https://example.com?utm_medium=social</code>.</p>
                                     <label class="switch float-right mt-6">
                                         <input type="checkbox" name="forward_query" value="1" {{ $url->forward_query ? 'checked' : '' }}>
