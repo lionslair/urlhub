@@ -51,6 +51,9 @@ echo "Repository cloned {{ $current_release }}";
 @task('run_composer')
 echo "Start composer dependencies install";
 cd {{ $current_release }}
+
+ln -nfs {{ $env_file }} .env
+
 php /usr/local/bin/composer install --no-interaction --no-progress --prefer-dist
 echo "Finish composer dependencies install";
 @endtask
